@@ -5,9 +5,11 @@ const Button = ({ handleClick, text }) => (
   <button onClick={handleClick}>{text}</button>
 );
 const StatisticLine = ({ text, value, modifier }) => (
-  <p>
-    {text} {value} {modifier}
-  </p>
+  <tr>
+    <td>
+      {text} {value} {modifier}
+    </td>
+  </tr>
 );
 const doDivision = (numerator, denominator) => {
   if (denominator === 0) {
@@ -25,14 +27,16 @@ const Statistics = ({ allGood, allNeutral, allBad }) => {
   }
 
   return (
-    <div>
-      <StatisticLine text="good" value={allGood} />
-      <StatisticLine text="neutral" value={allNeutral} />
-      <StatisticLine text="bad" value={allBad} />
-      <StatisticLine text="all" value={total} />
-      <StatisticLine text="average" value={avg} />
-      <StatisticLine text="positive" value={percentGood} modifier="%" />
-    </div>
+    <table>
+      <tbody>
+        <StatisticLine text="good" value={allGood} />
+        <StatisticLine text="neutral" value={allNeutral} />
+        <StatisticLine text="bad" value={allBad} />
+        <StatisticLine text="all" value={total} />
+        <StatisticLine text="average" value={avg} />
+        <StatisticLine text="positive" value={percentGood} modifier="%" />
+      </tbody>
+    </table>
   );
 };
 
