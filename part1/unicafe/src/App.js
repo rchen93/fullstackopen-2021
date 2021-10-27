@@ -4,7 +4,7 @@ const Header = ({ text }) => <h1>{text}</h1>;
 const Button = ({ handleClick, text }) => (
   <button onClick={handleClick}>{text}</button>
 );
-const StatItem = ({ text, value, modifier }) => (
+const StatisticLine = ({ text, value, modifier }) => (
   <p>
     {text} {value} {modifier}
   </p>
@@ -15,19 +15,23 @@ const doDivision = (numerator, denominator) => {
   }
   return numerator / denominator;
 };
-const Stats = ({ allGood, allNeutral, allBad }) => {
+const Statistics = ({ allGood, allNeutral, allBad }) => {
   const total = allGood + allNeutral + allBad;
   const avg = doDivision(allGood * 1.0 + allNeutral * 0 + allBad * -1, total);
   const percentGood = doDivision(allGood, total) * 100;
 
+  if (total === 0) {
+    return <div>No feedback given</div>;
+  }
+
   return (
     <div>
-      <StatItem text="good" value={allGood} />
-      <StatItem text="neutral" value={allNeutral} />
-      <StatItem text="bad" value={allBad} />
-      <StatItem text="all" value={total} />
-      <StatItem text="average" value={avg} />
-      <StatItem text="positive" value={percentGood} modifier="%" />
+      <StatisticLine text="good" value={allGood} />
+      <StatisticLine text="neutral" value={allNeutral} />
+      <StatisticLine text="bad" value={allBad} />
+      <StatisticLine text="all" value={total} />
+      <StatisticLine text="average" value={avg} />
+      <StatisticLine text="positive" value={percentGood} modifier="%" />
     </div>
   );
 };
@@ -63,7 +67,7 @@ const App = () => {
       <Button handleClick={handleNeutralClick} text="neutral" />
       <Button handleClick={handleBadClick} text="bad" />
       <Header text="statistics" />
-      <Stats allGood={allGood} allNeutral={allNeutral} allBad={allBad} />
+      <Statistics allGood={allGood} allNeutral={allNeutral} allBad={allBad} />
     </div>
   );
 };
