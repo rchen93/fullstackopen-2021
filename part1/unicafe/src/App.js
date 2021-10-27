@@ -4,17 +4,30 @@ const Header = ({ text }) => <h1>{text}</h1>;
 const Button = ({ handleClick, text }) => (
   <button onClick={handleClick}>{text}</button>
 );
-const StatItem = ({ text, count }) => (
+const StatItem = ({ text, value, modifier }) => (
   <p>
-    {text} {count}
+    {text} {value} {modifier}
   </p>
 );
+const doDivision = (numerator, denominator) => {
+  if (denominator === 0) {
+    return 0;
+  }
+  return numerator / denominator;
+};
 const Stats = ({ allGood, allNeutral, allBad }) => {
+  const total = allGood + allNeutral + allBad;
+  const avg = doDivision(allGood * 1.0 + allNeutral * 0 + allBad * -1, total);
+  const percentGood = doDivision(allGood, total) * 100;
+
   return (
     <div>
-      <StatItem text="good" count={allGood} />
-      <StatItem text="neutral" count={allNeutral} />
-      <StatItem text="bad" count={allBad} />
+      <StatItem text="good" value={allGood} />
+      <StatItem text="neutral" value={allNeutral} />
+      <StatItem text="bad" value={allBad} />
+      <StatItem text="all" value={total} />
+      <StatItem text="average" value={avg} />
+      <StatItem text="positive" value={percentGood} modifier="%" />
     </div>
   );
 };
