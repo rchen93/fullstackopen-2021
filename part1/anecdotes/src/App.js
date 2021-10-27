@@ -41,7 +41,7 @@ const App = () => {
   ];
 
   const [selected, setSelected] = useState(0);
-  const [allVotes, setAllVotes] = useState(Array(6).fill(0));
+  const [allVotes, setAllVotes] = useState(Array(anecdotes.length).fill(0));
 
   const handleVoteClick = () => {
     const allVotesCopy = [...allVotes];
